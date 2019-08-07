@@ -1,0 +1,53 @@
+# Figure 3
+## Dependencies
+To install the required dependencies to run the experiment (including
+RocksDB), run
+``
+./install_deps.sh
+``
+
+## Building
+To build the binary for running the tests, run
+``
+make
+``
+
+## Running
+There are two scripts corresponding to the hard drive tests (HDD) or the solid
+state drives (SSD).
+
+### HDD Tests
+To run the HDD tests, run:
+``
+./run_test_hdd.sh
+``
+
+### SSD Tests
+To run the SSD tests, run:
+``
+./run_test_ssd.sh
+``
+
+## Plotting
+The results of the tests were written to files describing the experiment.
+The non-data items can be removed with a convenience script as follows.
+
+``
+process_results.sh filestore_test_hdd_xfs_50000.txt > processed_filestore_hdd.dat
+``
+
+``
+process_results.sh filestore_test_ssd_xfs_50000.txt > processed_filestore_ssd.dat
+``
+
+``
+process_results.sh bluestore_test_hdd_xfs_50000.txt > processed_bluestore_hdd.dat
+``
+
+``
+process_results.sh bluestore_test_ssd_xfs_50000.txt > processed_bluestore_ssd.dat
+``
+
+These processed files can then be plotted with tools such as GNUPlot.
+The files are space seperate and contain (x,y) pairs corresponding to time and
+object writes completed.

@@ -1,0 +1,181 @@
+---
+- hosts: 127.0.0.1
+  become: yes
+  connection: local
+  tasks:
+  - name: Run fixpart
+    shell: "/share/testbed/bin/linux-fixpart all"
+    tags: PDL
+
+  - name: Run localfs
+    shell: "/share/testbed/bin/linux-localfs -t ext4 /l0"
+    tags: PDL
+
+  - name: Run localize-resolve
+    shell: "/share/testbed/bin/localize-resolv"
+    tags: PDL
+
+  - name: Run add autofs
+    shell: "/share/testbed/misc/autofs/dist/Ubuntu/xenial/install"
+    tags: PDL
+
+- hosts: all
+  become: yes
+  vars:
+    proxy_name: "http://ops:8888/"
+
+  tasks:
+  - name: Ping
+    ping:
+
+  - name: Update and upgrade apt packages
+    apt:
+      upgrade: yes
+      update_cache: yes
+      cache_valid_time: 86400 # one day
+
+  - name: Update RCMD default
+    copy:
+      content: ssh
+      dest: /etc/pdsh/rcmd_default
+
+  - name: Add Proxy support
+    lineinfile:
+      insertafter: EOF
+      line: "http_proxy={{ proxy_name }}\nhttps_proxy={{ proxy_name }}\nftp_proxy={{ proxy_name }}"
+      dest: /etc/environment
+
+  - name: Run fixpart
+    shell: "/share/testbed/bin/linux-fixpart all"
+    tags: PDL
+
+  - name: Run localfs
+    shell: "/share/testbed/bin/linux-localfs -t ext4 /l0"
+    tags: PDL
+
+  - name: Run localize-resolve
+    shell: "/share/testbed/bin/localize-resolv"
+    tags: PDL
+  
+  - name: Run sshkey
+    shell: "/share/testbed/bin/sshkey"
+    tags: PDL
+
+  - name: Enable 40 GB ethernet part1
+    shell: "/share/testbed/bin/network -f up"
+    tags: PDL
+
+  - name: Enable 40 GB ethernet part2
+    shell: "/share/testbed/bin/network --big --eth up"
+    tags: PDL
+
+  - name: Run add autofs
+    shell: "/share/testbed/misc/autofs/dist/Ubuntu/xenial/install"
+    tags: PDL
+
+- hosts: osds
+  become: yes
+  vars_prompt:
+    - name: "OSDDrive"
+      prompt: "The storage device to use for OSD WAL/Data (e.g., sdb or nvme0n1). Device name only (e.g., not /dev/sdb)"
+      default: "sdb"
+  vars:
+    # We wipe all of these
+    all_disks:
+      - sdb
+      - nvme0n1
+    data_install_disks:
+      - "{{ OSDDrive }}"
+    wal_install_disks:
+      - "{{ OSDDrive }}"
+    wal_size: "100G"
+    data_size: "+100%FREE"
+    proxy_name: "http://ops:8888/"
+
+  tasks:
+  - name: List disk partitions
+    parted:
+      device: "/dev/{{ item }}"
+      unit: MiB
+    register: info
+    loop: "{{ all_disks }}"
+
+  - debug:
+      msg: "{{ item.0.disk.dev }} {{ item.1.num }}"
+    loop: "{{ info.results|subelements('partitions') }}"
+
+  - parted:
+      device: "{{ item.0.disk.dev }}"
+      number: "{{ item.1.num }}"
+      state: absent
+    loop: "{{ info.results|subelements('partitions') }}"
+
+  - name: List disk volume groups
+    pvs:
+      device: "/dev/{{ item }}"
+    register: info2
+    loop: "{{ all_disks }}"
+
+  - debug:
+      msg: "{{ item.1 }}"
+    loop: "{{ info2.results|subelements('lvgs') }}"
+    when: info2 is skipped
+
+  - name: Create a logical volume for Ceph WAL
+    lvol:
+      vg: "ceph-wal-data"
+      lv: wal-lv1
+      pvs: "/dev/{{ item }}"
+      force: true
+      state: absent
+    loop: "{{ wal_install_disks }}"
+
+  - name: Create a logical volume for Ceph Data
+    lvol:
+      vg: "ceph-wal-data"
+      lv: data-lv1
+      pvs: "/dev/{{ item }}"
+      force: true
+      state: absent
+    loop: "{{ data_install_disks }}"
+
+  - name: Remove disk volume groups
+    lvg:
+      vg: "{{ item.1 }}"
+      force: yes
+      state: absent
+    loop: "{{ info2.results|subelements('lvgs') }}"
+
+  - name: Remove device partition table
+    shell: "wipefs -af /dev/{{ item }}"
+    loop: "{{ all_disks }}"
+
+  - name: Wipe disk metadata
+    shell: "dd if=/dev/zero of=/dev/{{ item }} bs=1M count=512"
+    loop: "{{ all_disks }}"
+
+  - name: Create a volume group for Ceph Wal and Data
+    lvg:
+      vg: "ceph-wal-data"
+      pvs: "/dev/{{ item }}"
+      pesize: "32"
+      force: true
+    loop: "{{ wal_install_disks }}"
+
+  - name: Create a logical volume for Ceph WAL
+    lvol:
+      vg: "ceph-wal-data"
+      lv: wal-lv1
+      pvs: "/dev/{{ item }}"
+      size: "{{ wal_size }}"
+      force: true
+    loop: "{{ wal_install_disks }}"
+
+  - name: Create a logical volume for Ceph Data
+    lvol:
+      vg: "ceph-wal-data"
+      lv: data-lv1
+      pvs: "/dev/{{ item }}"
+      size: "{{ data_size }}"
+      force: true
+    loop: "{{ data_install_disks }}"

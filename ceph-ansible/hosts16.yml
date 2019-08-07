@@ -1,0 +1,13 @@
+all:
+  children:
+    ceph:
+      children:
+        mons:
+          hosts:
+            h[0:2]
+        osds:
+          hosts:
+            h[0:15]
+        mgrs:
+          hosts:
+            h[0:2]
