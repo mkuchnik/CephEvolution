@@ -4,7 +4,7 @@ set -e
 # For installing erasure coded RBD
 
 RBDSize="1T"
-pool_size=1024
+pool_size=400 # Should be 400 at least
 stripe_unit="4M"
 stripe_count=1
 k=5
