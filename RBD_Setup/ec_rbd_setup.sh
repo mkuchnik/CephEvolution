@@ -35,9 +35,9 @@ sudo ceph osd pool create ecpool ${pool_size} ${pool_size} erasure "ec_profile_$
 echo "Allow overwrites"
 sudo ceph osd pool set ecpool allow_ec_overwrites true
 
-sudo ceph osd pool application enable rbd ecpool || echo 0
+sudo ceph osd pool application enable ecpool rbd
 sudo rbd create myrbd --size ${RBDSize} --image-feature layering --stripe-unit \
-  ${stripe_unit} --stripe-count ${stripe_count} --data-pool=ecpool
+  ${stripe_unit} --stripe-count ${stripe_count} --data-pool ecpool
 sudo rbd map myrbd --name client.admin
 
 sudo lsblk
