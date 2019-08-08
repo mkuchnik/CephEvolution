@@ -69,7 +69,10 @@ Running the tests means we need to locally mount a block device from Ceph.
 The scripts for running these benchmarks are in the Cluster\_Bench\_Scripts/
 directory (ec\_rbd\_bench.sh or rbd\_bench.sh).
 The scripts are given the rbd device as an argument.
-``./rbd_bench.sh /dev/rbd``
+
+For example, if the rbd device is name rbd0, you can do the following:
+``./rbd_bench.sh /dev/rbd0``
+
 RBD creation scripts are in RBD\_Setup/.
 
 
