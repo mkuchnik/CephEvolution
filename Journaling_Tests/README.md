@@ -33,19 +33,19 @@ The results of the tests were written to files describing the experiment.
 The non-data items can be removed with a convenience script as follows.
 
 ``
-process_results.sh filestore_test_hdd_xfs_50000.txt > processed_filestore_hdd.dat
+process_results_for_plot.sh filestore_test_hdd_xfs_50000.txt > processed_filestore_hdd.dat
 ``
 
 ``
-process_results.sh filestore_test_ssd_xfs_50000.txt > processed_filestore_ssd.dat
+process_results_for_plot.sh filestore_test_ssd_xfs_50000.txt > processed_filestore_ssd.dat
 ``
 
 ``
-process_results.sh bluestore_test_hdd_xfs_50000.txt > processed_bluestore_hdd.dat
+process_results_for_plot.sh bluestore_test_hdd_xfs_50000.txt > processed_bluestore_hdd.dat
 ``
 
 ``
-process_results.sh bluestore_test_ssd_xfs_50000.txt > processed_bluestore_ssd.dat
+process_results_for_plot.sh bluestore_test_ssd_xfs_50000.txt > processed_bluestore_ssd.dat
 ``
 
 These processed files can then be plotted with tools such as GNUPlot.
