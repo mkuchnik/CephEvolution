@@ -36,7 +36,7 @@ We provide more comprehensive instructions in the
 
 
 ## Figure 4 (The effect of directory splitting on throughput)
-Here we measure 4k RADOS writes with Filestore and observe that directory
+Here we measure 4KiB RADOS writes with Filestore and observe that directory
 splitting causes a reduction in throughput.
 The scripts for running these benchmarks are in the Cluster\_Bench\_Scripts/
 directory (scripts of the form benchmark\_micro\_\* are RADOS benchmarks).
