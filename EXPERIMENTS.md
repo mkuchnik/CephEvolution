@@ -82,3 +82,12 @@ Results shown are for the HDD cluster.
 The scripts for running these benchmarks are in the Cluster\_Bench\_Scripts/
 directory, although they do require testing 8 clients in parallel rather than 1.
 RBD creation scripts are in RBD\_Setup/.
+
+To do the parallel run setup, run the setup script to create a replicated or EC RBD.
+You can then ssh into the relevant nodes and install FIO.
+Finally, mount the rbd device in the following fashion:
+``sudo rbd map myrbd``
+
+Running the test is parallel can be done with the scripts from Figure 9,
+assuming they are started in parallel.
+The pdsh tool is a good way to start the scripts at the same time.
