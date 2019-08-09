@@ -16,7 +16,7 @@ results (found in the ceph-ansible directory).
 ``./init_repo.sh`` will deploy via ansible.
 This script has a parameter to choose SSD (NVMe) or HDD, but changing the
 backend from FileStore to BlueStore requires editting the ansible configuration
-(e.g., in group\_vars/all.yml.)
+(in group\_vars/all.yml and group\_vars/osds.yml).
 The Ceph\_Deploy\_Install\_Scripts directory contains ceph-deploy scripts.
 If using ceph-deploy, we recommend reading the documentation before running
 experiments.
