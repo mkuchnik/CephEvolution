@@ -74,6 +74,8 @@ For example, if the rbd device is name rbd0, you can do the following:
 ``./rbd_bench.sh /dev/rbd0``
 
 RBD creation scripts are in RBD\_Setup/.
+Erasure coding parameters (e.g., k and m) can be found in the ec\_rbd\_bench.sh
+scripts.
 
 
 ## Figure 10 (The IOPS of random 4 KiB writes to RBD with Replication and EC)
@@ -84,10 +86,9 @@ directory, although they do require testing 8 clients in parallel rather than 1.
 RBD creation scripts are in RBD\_Setup/.
 
 To do the parallel run setup, run the setup script to create a replicated or EC RBD.
-You can then ssh into the relevant nodes and install FIO.
-Finally, mount the rbd device in the following fashion:
+You can continue to mount rbd devices on a node as follows:
 ``sudo rbd map myrbd``
 
-Running the test is parallel can be done with the scripts from Figure 9,
-assuming they are started in parallel.
-The pdsh tool is a good way to start the scripts at the same time.
+Running the test is parallel can be done as it is done in the scripts from Figure 9.
+However, the tests must be started in parallel.
+We mounted all 8 devices on the same node in our experiments.
