@@ -61,6 +61,10 @@ splitting causes a reduction in throughput.
 The scripts for running these benchmarks are in the `Cluster_Bench_Scripts/`
 directory.
 Scripts of the form `benchmark_micro_*` are RADOS benchmarks.
+You probably want to use `benchmark_micro_write.sh`.
+```bash
+./benchmark_micro_write.sh 4KB
+```
 
 
 ## Figure 7 (The throughput of steady state object writes to RADOS)
@@ -70,6 +74,11 @@ Throughput is evaluated at various object sizes.
 The scripts for running these benchmarks are in the `Cluster_Bench_Scripts/`
 directory.
 Scripts of the form `benchmark_micro_*` are RADOS benchmarks.
+You probably want to use `benchmark_micro_write.sh` or some wrapper of it, such
+as ``bench_sweep.sh`` (a wrapper of ``benchmark_micro_all.sh``).
+```bash
+./bench_sweep.sh
+```
 
 
 ## Figure 8 (The throughput of 4 KiB RADOS object writes to RADOS)
@@ -78,6 +87,10 @@ This figure contains plots from Figure 4 as well as the corresponding BlueStore 
 The scripts for running these benchmarks are in the `Cluster_Bench_Scripts/`
 directory.
 Scripts of the form `benchmark_micro_*` are RADOS benchmarks.
+You probably want to use `benchmark_micro_write.sh`.
+```bash
+./benchmark_micro_write.sh 4KB
+```
 
 
 ## Figure 9 (The throughput of variable-sized RBD object writes)
