@@ -111,10 +111,17 @@ The scripts for running these benchmarks are in the `Cluster_Bench_Scripts/`
 directory (`Cluster_Bench_Scripts/ec_rbd_bench.sh` or `Cluster_Bench_Scripts/rbd_bench.sh`).
 The scripts are given the rbd device as an argument.
 
-For example, if the rbd device is name rbd0, you can do the following:
+For example, if the rbd device is name rbd0, you can do the following for a
+replicated RBD test:
 ```bash
 cd Cluster_Bench_Scripts
 ./rbd_bench.sh /dev/rbd0
+```
+
+Similarly, for an erasure coded device:
+```bash
+cd Cluster_Bench_Scripts
+./ec_rbd_bench.sh /dev/rbd0
 ```
 
 If you mount multiple RBD devices, you'll get higher numbered rbd devices.
