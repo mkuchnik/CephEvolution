@@ -4,7 +4,8 @@ A repository for replicating the experiments found in
 Ceph Evolution" (SOSP '19).
 Efforts were made to best follow the Research Artifact Evaluation for SOSP 2019
 described [here](https://sysartifacts.github.io/instructions.html).
-The Ceph project's source code can be found [here](https://github.com/ceph).
+The Ceph project's source code can be found [here](https://github.com/ceph) and
+you can find documentation [here](https://docs.ceph.com/docs/luminous/).
 
 ## Hardware Requirements
 The experiments were run on the Carnegie Mellon University [Parallel Data
