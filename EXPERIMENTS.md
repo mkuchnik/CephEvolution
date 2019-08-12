@@ -9,6 +9,9 @@ Replicating the cluster setup is the most challenging part of running these
 experiments --- once a cluster is setup, the benchmarking scripts are relatively
 easy to use.
 
+We make use of Ceph benchmarking tools.
+A guide covering these is [here](https://tracker.ceph.com/projects/ceph/wiki/Benchmark_Ceph_Cluster_Performance).
+
 The experiments were originally run using [ceph-deploy](https://docs.ceph.com/docs/master/rados/deployment/).
 However, we also include a
 [ceph-ansible](https://docs.ceph.com/ceph-ansible/master/installation/methods.html) setup that should reproduce the
