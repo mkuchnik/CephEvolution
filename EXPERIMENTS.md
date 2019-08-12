@@ -36,6 +36,8 @@ If using ceph-deploy, we recommend reading the documentation before running
 experiments.
 These can be found
 [here](https://docs.ceph.com/docs/luminous/rados/deployment/).
+You can find the ceph-deploy scripts in `Ceph_Deploy_Install_Scripts`.
+These scripts are included just for completion.
 
 Once your cluster is installed, you should check the status of your cluster.
 ```bash
