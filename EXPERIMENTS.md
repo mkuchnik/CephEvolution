@@ -25,7 +25,8 @@ This script has a parameter to choose SSD (NVMe) or HDD, but changing the
 backend from FileStore to BlueStore requires editting the ansible configuration
 (in `group_vars/all.yml` and `group_vars/osds.yml`).
 The `Ceph_Deploy_Install_Scripts` directory contains ceph-deploy scripts.
-The changes in `group_vars/all.yml` are as follows:
+The changes in `group_vars/all.yml` are as follows (for filestore, you want XFS
+options, too):
 ![Backend_Edit_All](Figures/Backend_Edit_All.png)
 
 The changes in `group_vars/osds.yml` are as follows:
