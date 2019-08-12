@@ -4,7 +4,7 @@ To install the required dependencies to run the experiment (including
 RocksDB), run
 ```bash
 ./install_deps.sh
-``
+```
 
 ## Building
 To build the binary for running the tests, run
