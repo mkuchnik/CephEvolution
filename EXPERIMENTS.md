@@ -58,7 +58,8 @@ We provide more comprehensive instructions in the
 Here we measure 4KiB RADOS writes with Filestore and observe that directory
 splitting causes a reduction in throughput.
 The scripts for running these benchmarks are in the `Cluster_Bench_Scripts/`
-directory (scripts of the form `benchmark_micro_\*` are RADOS benchmarks).
+directory.
+Scripts of the form `benchmark_micro_*` are RADOS benchmarks.
 
 
 ## Figure 7 (The throughput of steady state object writes to RADOS)
@@ -67,6 +68,7 @@ BlueStore.
 Throughput is evaluated at various object sizes.
 The scripts for running these benchmarks are in the `Cluster_Bench_Scripts/`
 directory.
+Scripts of the form `benchmark_micro_*` are RADOS benchmarks.
 
 
 ## Figure 8 (The throughput of 4 KiB RADOS object writes to RADOS)
@@ -74,6 +76,7 @@ Here we compared 4KiB RADOS object writes.
 This figure contains plots from Figure 4 as well as the corresponding BlueStore results.
 The scripts for running these benchmarks are in the `Cluster_Bench_Scripts/`
 directory.
+Scripts of the form `benchmark_micro_*` are RADOS benchmarks.
 
 
 ## Figure 9 (The throughput of variable-sized RBD object writes)
@@ -92,11 +95,12 @@ Mounting a RBD device successfully should result in something as follows:
 ![RBD_Mount](Figures/RBD_Mount.png)
 
 The scripts for running these benchmarks are in the `Cluster_Bench_Scripts/`
-directory (`ec_rbd_bench.sh` or `rbd_bench.sh`).
+directory (`Cluster_Bench_Scripts/ec_rbd_bench.sh` or `Cluster_Bench_Scripts/rbd_bench.sh`).
 The scripts are given the rbd device as an argument.
 
 For example, if the rbd device is name rbd0, you can do the following:
 ```bash
+cd Cluster_Bench_Scripts
 ./rbd_bench.sh /dev/rbd0
 ```
 
