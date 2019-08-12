@@ -89,8 +89,21 @@ We use the Flexibile I/O tester (FIO) tool to perform our benchmarks.
 Running the tests means we need to locally mount a block device from Ceph.
 
 RBD creation scripts are in `RBD_Setup/`.
+
+We can mount replicated RBD with:
+```bash
+cd RBD_Setup
+./rbd_setup.sh
+```
+
 Erasure coding parameters (e.g., k and m) can be found in the `ec_rbd_bench.sh`
 scripts.
+We can mount an Erasure coded RBD with:
+```bash
+cd RBD_Setup
+./ec_rbd_setup.sh
+```
+
 Mounting a RBD device successfully should result in something as follows:
 ![RBD_Mount](Figures/RBD_Mount.png)
 
