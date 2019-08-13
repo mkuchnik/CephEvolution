@@ -1,7 +1,7 @@
 # Figure 3
 ## Dependencies
 To install the required dependencies to run the experiment (including
-RocksDB), run
+RocksDB -- though we include it in this repo), run
 ```bash
 ./install_deps.sh
 ```
