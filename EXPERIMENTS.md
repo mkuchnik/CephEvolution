@@ -165,4 +165,5 @@ sudo rbd map myrbd
 
 Running the test is parallel can be done as it is done in the scripts from Figure 9.
 However, the tests must be started in parallel.
+Be careful to not clobber output files by having them map to the same location.
 We mounted all 8 devices on the same node in our experiments.
