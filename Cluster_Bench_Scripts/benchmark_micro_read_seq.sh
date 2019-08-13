@@ -12,7 +12,8 @@ threads=128
 max_objects=10000000
 read_type="seq"
 
-pdsh -w h[0-15] "sudo echo 3 | sudo tee /proc/sys/vm/drop_caches && sudo sync"
+pdsh -w h[0-15] "sudo sync && sudo echo 3 | sudo tee /proc/sys/vm/drop_caches && sudo sync"
+sleep 1s
 sudo ceph -s
 eval \
   "sudo ceph osd pool create ${pool_name} ${pool_size} ${pool_size} replicated \
