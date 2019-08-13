@@ -16,7 +16,7 @@ USESSD=false
 # fio: for RBD benchmarks
 
 sudo apt-get update
-sudo apt-get install virtualenv fio
+sudo apt-get install -y virtualenv fio
 virtualenv -p python3 ceph-ansible/venv
 source ceph-ansible/venv/bin/activate
 # We need ansible
