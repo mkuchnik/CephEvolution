@@ -5,11 +5,12 @@ set -e
 
 pool_name="scbench3"
 pool_size=1024 # Can be 1024, 2048
-bench_time=600 # in seconds
+bench_time=1200 # in seconds
 object_size="$1" # put bytes (1KB,1MB,etc.)
 replication_factor=3
 threads=128
-max_objects=10000000
+#max_objects=1000000000000
+max_objects=-1 # Unlimited
 
 eval \
   "sudo ceph tell mon.\* injectargs '--mon-allow-pool-delete=true' \
