@@ -19,7 +19,7 @@ eval \
    && sudo ceph tell mon.\* injectargs '--mon-allow-pool-delete=false'" \
   || time echo 0
 
-pdsh -w h[0-15] "sudo echo 3 | sudo tee /proc/sys/vm/drop_caches && sudo sync"
+pdsh -w h[0-15] "sudo sync && sudo /sbin/sysctl vm.drop_caches=3 && sudo sync"
 sudo ceph -s
 
 # Give some time for things to settle down

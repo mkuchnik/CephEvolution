@@ -12,7 +12,7 @@ threads=128
 max_objects=10000000
 read_type="rand"
 
-pdsh -w h[0-15] "sudo sync && sudo echo 3 | sudo tee /proc/sys/vm/drop_caches && sudo sync"
+pdsh -w h[0-15] "sudo sync && sudo /sbin/sysctl vm.drop_caches=3 && sudo sync"
 sleep 1s
 sudo ceph -s
 eval \

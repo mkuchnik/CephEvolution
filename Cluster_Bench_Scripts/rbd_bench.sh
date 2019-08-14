@@ -16,7 +16,7 @@ for i in 128 64 32 16 8 4; do
     --ramp_time=None --name=rbd_test \
     --filename=${filename}"
   eval ${cmd} | tee rbd-tests/${rw}-${iodepth}-${bs}.txt
-  pdsh -w h[0-15] "sudo sync && sudo echo 3 | sudo tee /proc/sys/vm/drop_caches && sudo sync"
+  pdsh -w h[0-15] "sudo sync && sudo /sbin/sysctl vm.drop_caches=3 && sudo sync"
   sleep 1s
   pdsh -w h[0-15] "sudo systemctl restart ceph-osd.target"
   sleep 15s
