@@ -7,6 +7,7 @@ set -e
 
 # We need a hostfile describing the cluster config
 HOSTFILE="hosts16.yml"
+# We also can use SSD or HDD for our disk backend.
 USESSD=false
 
 
