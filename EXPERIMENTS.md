@@ -55,7 +55,7 @@ We construct this benchmark in the `Journaling_Tests` directory.
 To run the tests, simply run
 ```bash
 cd Journaling_Tests
-./install_deps && make && ./run_test_hdd.sh && ./run_test_ssd.sh
+./install_deps.sh && make && ./run_test_hdd.sh && ./run_test_ssd.sh
 ```
 We provide more comprehensive instructions in the
 [Journaling_Tests/README.md](Journaling_Tests/README.md) file in that directory.
