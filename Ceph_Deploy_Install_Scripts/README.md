@@ -10,15 +10,15 @@ bash run_full_install_bluestore_hdd.sh
 ```
 For Filestore HDD:
 ```bash
-run_full_install_filestore_hdd.sh
+bash run_full_install_filestore_hdd.sh
 ```
 For Bluestore NVMe (SSD):
 ```bash
-run_full_install_bluestore_nvme.sh
+bash run_full_install_bluestore_nvme.sh
 ```
 For Filestore NVMe (SSD):
 ```bash
-run_full_install_filestore_nvme.sh
+bash run_full_install_filestore_nvme.sh
 ```
 
 If you open one of these, you will see that it calls ``setup_ceph_deploy.sh``,
