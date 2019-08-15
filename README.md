@@ -17,10 +17,12 @@ a HDD and SSD.
 Nodes are connected with a Cisco Nexus 3264-Q 64-port QSFP+ 40GbE switch.
 
 Node hardware:
+```
 CPU: 16-core Intel E5-2698Bv3 Xeon 2GHz
 RAM: 64GiB
 Drives: 400GB Intel P3600 NVMe SSD, 4TB 7200RPM Seagate ST4000NM0023 HDD
 NIC: Mellanox MCX314A-BCCT 40GbE
+```
 
 ## Software Requirements
 We use the Ceph project to demonstrate the effect of filesystem backends.
