@@ -35,3 +35,10 @@ However, Ceph RBD may require newer kernel features as described [here](https://
 ## Experiment Descriptions
 We provide instructions on reproducing the results of the experiments in the
 [EXPERIMENTS.md](EXPERIMENTS.md) file.
+
+## Getting Started
+If you haven't deployed a Ceph cluster before, we recommend following the 
+ceph-deploy guide found
+[here](https://docs.ceph.com/docs/luminous/rados/deployment/).
+You will need to understand how to deploy monitors, managers, and OSDs.
+You do not need to deploy a MDS for our purposes.
