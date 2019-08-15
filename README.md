@@ -39,6 +39,9 @@ We provide instructions on reproducing the results of the experiments in the
 ## Getting Started
 If you haven't deployed a Ceph cluster before, we recommend following the 
 ceph-deploy guide found
-[here](https://docs.ceph.com/docs/luminous/rados/deployment/).
-You will need to understand how to deploy monitors, managers, and OSDs.
+[here](https://docs.ceph.com/docs/luminous/rados/deployment/) to understand how
+Ceph works in practice.
+You will need to understand how to deploy and maintain monitors, managers, and OSDs.
 You do not need to deploy a MDS for our purposes.
+You can then switch to the Ansible install method once you have a better idea of
+what the configurations mean.
