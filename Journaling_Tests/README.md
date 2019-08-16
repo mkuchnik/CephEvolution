@@ -12,6 +12,18 @@ To build the binary for running the tests, run
 make
 ```
 
+## Docker
+We provide a build script for building the container and a Docker run script for
+actually running the containers.
+
+```bash
+./docker_build.sh
+./docker_run.sh
+```
+
+This will give you a shell, where you can then run ``make`` as above.
+
+
 ## Running
 There are two scripts corresponding to the hard drive tests (HDD) or the solid
 state drives (SSD).
