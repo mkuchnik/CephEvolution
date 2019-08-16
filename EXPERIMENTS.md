@@ -47,7 +47,6 @@ ceph -s
 The status should look something like the following:
 ![Ceph_Status](Figures/Ceph_Status.png)
 
-
 ## Figure 3 (Overhead of running object store on journaling file system)
 Here we measure the overhead of running an object store on top of a journaling
 file system.
@@ -70,6 +69,13 @@ Scripts of the form `benchmark_micro_*` are RADOS benchmarks.
 You probably want to use `benchmark_micro_write.sh`.
 ```bash
 ./benchmark_micro_write.sh 4KB
+```
+
+We provide a convenience script for plotting the RADOS data.
+The benchmark script will produce a `bench_results.txt` file, which can be read
+(and plotted) with this python script.
+```
+python3 plot_bench_results.py --paths <path-to-bench_results.txt>
 ```
 
 
