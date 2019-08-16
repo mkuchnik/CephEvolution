@@ -16,6 +16,8 @@ make
 We provide a build script for building the container and a Docker run script for
 actually running the containers.
 Installing Docker is covered [here](https://docs.docker.com/install/).
+You probably don't want to do anything but build binaries in here, though, since
+you will need to interact with devices and page caches.
 
 ```bash
 ./docker_build.sh
