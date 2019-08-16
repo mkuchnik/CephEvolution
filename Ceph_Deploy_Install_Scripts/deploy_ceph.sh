@@ -42,7 +42,7 @@ sudo apt install -y ceph-deploy \
   blktrace \
   python3
 
-# Add no password
+# Add no password (probably not needed)
 echo "{username} ALL = (root) NOPASSWD:ALL" \
   | sudo tee /etc/sudoers.d/${CephAdminUsername}
 sudo chmod 0440 /etc/sudoers.d/${CephAdminUsername}
@@ -56,8 +56,10 @@ echo "ftp_proxy=$ftp_proxy" | sudo tee -a /etc/environment
 sudo /share/testbed/bin/linux-fixpart all                     || exit 1
 sudo /share/testbed/bin/linux-localfs -t ext4 /l0             || exit 1
 sudo /share/testbed/bin/localize-resolv                       || exit 1
-# generate key: ssh-keygen -t rsa -f ./id_rsa
 /share/testbed/bin/sshkey                                     || exit 1
-# Enable 40 GB ethernet
+# Enable 40 Gb ethernet
 sudo  /share/testbed/bin/network -f up                        || exit 1
 sudo /share/testbed/bin/network --big --eth up                || exit 1
+
+# We can rewrite hosts file to use 40Gb ethernet
+sudo python3 ${ScriptsHome}/rewrite_hosts.py

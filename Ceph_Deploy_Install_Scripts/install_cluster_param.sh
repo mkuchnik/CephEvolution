@@ -1,32 +1,22 @@
 mkdir ceph_cluster
 cd ceph_cluster
 
-# /dev/sda Crucial/Micron RealSSD m4/C400/P400
-# /dev/sdb Hitachi Ultrastar A7K2000
-# /dev/sdc Hitachi Ultrastar 7K3000
-# /dev/sdd Hitachi Ultrastar 7K3000
-
 username="mkuchnik"
 release="luminous" # Jewel is not supported"
 node_prefix="h"
-n_nodes=16
-#n_nodes=1
-start_node_id=0
-#nvme_switch=false # Make sure to set this
-nvme_switch=$2 # Make sure to set this
-#store_type="--bluestore"
-store_type=$1
+n_nodes=16 # How many nodes
+start_node_id=0 # Usually nodes go from 0 to n_nodes-1
+nvme_switch=$2 # true (NVMe) or false (HDD)
+store_type=$1 # --bluestore or --filestore
 
-# TODO can compute with above
+# Using above range, we have these nodes
 nodes="h0 h1 h2 h3 h4 h5 h6 h7 h8 h9 h10 h11 h12 h13 h14 h15"
-#nodes="h0 h1 h2 h3"
 
+# We can have OSD data and WAL split by device. However, we collocate.
 if $nvme_switch; then
-  DATA=/dev/nvme0n1
   WAL=/dev/nvme0n1
   END_PART=350
 else
-  DATA=/dev/sdc
   WAL=/dev/sdb
   END_PART=2500
 fi
@@ -49,9 +39,7 @@ ceph-deploy --username ${username} mgr create ${node_prefix}0
 nodes_range="${node_prefix}[${start_node_id}-$((n_nodes-1))]"
 echo "Nodes range is ${nodes_range}"
 
-#pdsh -w ${nodes_range} "sudo wipefs -a ${DATA}"
 pdsh -w ${nodes_range} "sudo wipefs -af ${WAL}"
-#pdsh -w ${nodes_range} "sudo ceph-volume lvm zap ${DATA} --destroy"
 pdsh -w ${nodes_range} "sudo ceph-volume lvm zap ${WAL} --destroy"
 pdsh -w ${nodes_range} "sudo parted ${WAL} mklabel gpt"
 pdsh -w ${nodes_range} "sudo parted ${WAL} unit GB mkpart xfs 0 100"
@@ -68,8 +56,6 @@ for nid in $(seq ${start_node_id} 1 $((n_nodes-1))); do
     # for HDD
       ceph-deploy --username ${username} osd create ${store_type} --fs-type xfs \
         --data ${WAL}2 --journal ${WAL}1 ${h}
-      # If splitting data/journal by device, use something like:
-      # --data ${DATA} --journal ${WAL}1 ${h}
     fi
 done
 

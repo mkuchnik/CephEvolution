@@ -1,34 +1,24 @@
 #!/bin/bash
+# This script runs deply_ceph.sh on all nodes and copies ssh keys
+# Since we don't use a special Ceph user, we probably don't need to copy keys
 
-# fail on error
-# set -e
+set -e
 
 # params
-script_location="/users/mkuchnik/Programming/CephExp/scripts/deploy_ceph.sh"
-CephAdminUsername="mkuchnik" # TODO this has to be the same as deploy_ceph.sh
-ScriptsHome="/users/mkuchnik/Programming/CephExp/scripts"
-node_prefix="nodes-"
+# We assume a shared filesystem with which we can distribute other scripts
+# through. You will have to change this path to point to deploy_ceph.sh
+script_location="path/to/scripts/deploy_ceph.sh"
+# Name used to install Ceph. This will have to be changed to your user
+CephAdminUsername="mkuchnik"
 node_prefix="h"
 
 # 1. Run deploy_ceph.sh on all nodes
 pdsh -w "${node_prefix}[1-15]" "bash $script_location"
 
 # 2. Generate a keypair
-# TODO we don't need to do this usually
-# ssh-keygen
+# We don't need to do this usually but we could with ssh-keygen
 
 # 3. Copy keypair to nodes
 for i in {1..15}; do
   ssh-copy-id "${CephAdminUsername}@${nodes_prefix}$i"
 done
-
-full_script_path="${ScriptsHome}/rewrite_hosts.py"
-rewrite_hosts_cmd="sudo python3 ${full_script_path}"
-
-echo ${rewrite_hosts_cmd}
-
-# pdsh -w ${nodes_prefix}[1-16] ${rewrite_hosts_cmd}
-
-# sudo python3 ${ScriptsHome}/rewrite_hosts.py
-
-# 4. TODO add nodes with CephAdmin to ~/.ssh/config
