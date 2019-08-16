@@ -15,6 +15,7 @@ make
 ## Docker
 We provide a build script for building the container and a Docker run script for
 actually running the containers.
+Installing Docker is covered [here](https://docs.docker.com/install/).
 
 ```bash
 ./docker_build.sh
