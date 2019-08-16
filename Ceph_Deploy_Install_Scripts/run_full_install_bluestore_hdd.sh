@@ -1,3 +1,7 @@
+#!/bin/bash
+# Installs Bluestore with HDD
+set -e
+
 sudo bash setup_ceph_deploy.sh
 bash deploy_ceph.sh
 bash deploy_ceph_all.sh

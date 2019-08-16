@@ -2,6 +2,8 @@
 These are ceph-deploy scripts which we have previously used to bootstrap a
 cluster.
 We currently use ceph-ansible, and these are provided for historical reasons.
+These scripts are not portable across clusters, and are heavily tuned to the
+cluster we used.
 
 The scripts you use to launch the cluster are:
 For Bluestore HDD:
