@@ -11,11 +11,11 @@ FullDBPath="${DBPath}/testdb"
 mkdir FullDBPath
 
 bash install_fs_ssd.sh ${FS}
-sudo echo 3 | sudo tee /proc/sys/vm/drop_caches && sudo sync
+sudo sync && sudo /sbin/sysctl vm.drop_caches=3 && sudo sync
 time ./main ${NObjects} filesystem ${FullDBPath} ${FilestorePath} | tee \
   filestore_test_ssd_${FS}_${NObjects}${TAG}.txt;
 
 bash install_fs_ssd.sh ${FS}
-sudo echo 3 | sudo tee /proc/sys/vm/drop_caches && sudo sync
+sudo sync && sudo /sbin/sysctl vm.drop_caches=3 && sudo sync
 time ./main ${NObjects} raw_block ${FullDBPath} ${BlockPath} | tee \
   bluestore_test_ssd_${FS}_${NObjects}${TAG}.txt;
