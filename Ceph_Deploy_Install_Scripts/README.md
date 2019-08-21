@@ -39,6 +39,10 @@ there.
 Finally, ``install_cluster_param.sh`` actually installs Ceph on the nodes.
 
 For porting to a different cluster, you'll want to change devices in ``install_cluster_param.sh``.
+You will also need to change hostnames for
+``deploy_ceph.sh``, ``deploy_ceph_all.sh``, and ``install_cluster_param.sh``,
+since we assume there are 16 nodes, and their names are of the form `h0`, `h1`,
+`h2`,...`h15`.
 We also make an assumption on having a common view of scripts between nodes
 (e.g., a network filesystem).
 If you don't have such a setup, you will have to emulate the view by copying the
