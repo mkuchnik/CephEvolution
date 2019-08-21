@@ -95,6 +95,7 @@ ssh ${node_prefix}1 sudo ceph -s
 # Object Gateways -- we don't use this for experiments
 ceph-deploy --username ${username} rgw create ${node_prefix}1
 
+# Lastly, we restart services, but this isn't required
 ceph_cluster_dir=${ScriptsHome}
 for nid in $(seq ${start_node_id} 1 $((n_nodes-1))); do
   h="${node_prefix}${nid}"
