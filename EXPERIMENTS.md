@@ -9,13 +9,22 @@ Replicating the cluster setup is the most challenging part of running these
 experiments --- once a cluster is setup, the benchmarking scripts are relatively
 easy to use.
 
+## Benchmark tools
 We make use of Ceph benchmarking tools.
 A guide covering these is [here](https://tracker.ceph.com/projects/ceph/wiki/Benchmark_Ceph_Cluster_Performance).
+In general, you should be able to tell how we ran the tools just by referencing
+the scripts we created for those tests.
 
+## Cluster Deployment
 The experiments were originally run using [ceph-deploy](https://docs.ceph.com/docs/master/rados/deployment/).
 However, we also include a
 [ceph-ansible](https://docs.ceph.com/ceph-ansible/master/installation/methods.html) setup that should reproduce the
 results (found in the `ceph-ansible` directory).
+Ceph-ansible has a steeper learning curve than ceph-deploy, so it may make sense
+to start with ceph-deploy (on a small cluster) and then switch to ceph-ansible
+once you understand the deployment process.
+
+### Ceph-Ansible
 To deploy with ansible, run:
 ```bash
 ./init_repo.sh
@@ -32,6 +41,42 @@ options, too):
 The changes in `group_vars/osds.yml` are as follows:
 ![Backend_Edit_OSDs](Figures/Backend_Edit_OSDs.png)
 
+The deployment was customized to our Orca cluster.
+To port the ansible install to another cluster, you'll definitely want to change
+some parameters.
+You should be familiar with Ansible; Ansible docs are [here](https://docs.ansible.com/ansible).
+Obviously, you'll need to change the `hosts16.yml` file to create a new hosts
+file to reflect the hosts you want to use as your OSDs, Monitors, and Managers.
+The details of hosts files are described
+[here](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html).
+You can leave `site.yml` the same.
+`partition_cluster_lvm.yml` has two steps.
+1. It sets RCMD default to ssh and sets up an initialization needed on the Orca cluster.
+For example, we update each node so they see the right hostname, and we enable
+some hardware options.
+We've tagged these Orca cluster specific actions as "PDL".
+You can safely ignore these PDL actions for a different cluster.
+2. We use [LVM](https://en.wikipedia.org/wiki/Logical_Volume_Manager_(Linux)) to create logical volumes which Ceph OSDs can place data/write ahead log (WAL).
+The first half of this stage removes (wipes) the old LVMs off the system, and the second
+half adds new ones.
+By default, we wipe anything under the variable `all_disks`, so you'll probably
+want to change that.
+We then use `data_install_disks` and `wal_install_disks` to choose the disks to
+use for the OSDs.
+Currently, we assign both of these to a variable (`OSDDrive`) that is passed on
+the command line.
+
+You'll then need to proceed to `group_vars/all.yml`, and change things that are
+not applicable to you.
+I suspect these are going to be `monitor_interface` and `public_network`.
+If you changed any of the LVM names in `partition_cluster_lvm.yml`, you're going
+to have to reflect those changes in `group_vars/osds.yml`.
+For example, we place both data and journal on the virtual group, `ceph-wal-data`, so you need to make sure you didn't change that.
+The other configurations in `group_vars/` don't really use any options, so we
+don't expect you'd have to change them.
+
+
+### Ceph-Deploy
 If using ceph-deploy, we recommend reading the documentation before running
 experiments.
 These can be found
