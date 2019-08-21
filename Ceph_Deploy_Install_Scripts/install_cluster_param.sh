@@ -1,7 +1,10 @@
 mkdir ceph_cluster
 cd ceph_cluster
 
-username="mkuchnik"
+# The username for Ceph install
+#username="mkuchnik"
+# TODO by default we assume current user
+username=$(id -un)
 release="luminous" # Jewel is not supported"
 node_prefix="h"
 n_nodes=16 # How many nodes

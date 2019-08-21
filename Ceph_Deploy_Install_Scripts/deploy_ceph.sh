@@ -10,15 +10,26 @@ set -e
 # We can put jewel, etc.
 CephStableRelease="luminous"
 # Name used to install Ceph. This will have to be changed to your user
-CephAdminUsername="mkuchnik"
+#CephAdminUsername="mkuchnik"
+# Note: by default we assume current user
+CephAdminUsername=$(id -un)
 # We assume a shared filesystem with which we can distribute other scripts
 # through. You will have to change this path
-ScriptsHome="path/to/shared/ceph_deploy_scripts" 
+#ScriptsHome="path/to/shared/ceph_deploy_scripts"
+# Note: by default we assume it's current directory and pass it above
+ScriptsHome=$1
+
+if [ "$#" -eq 0 ]; then
+  echo "Need scripts home argument"
+  exit 1
+fi
 
 # These are proxy settings used on PDL Orca
 export http_proxy="http://ops:8888/"
 export https_proxy="http://ops:8888/"
 export ftp_proxy="http://ops:8888/"
+# we don't want apt to bug us with prompts
+export DEBIAN_FRONTEND=noninteractive
 echo "proxy:$http_proxy"
 
 # 1. Add release key
@@ -35,9 +46,9 @@ echo deb \
 # We also install ntp and ssh as that's implicitly needed
 # blktrace is for benchmarking
 # python3 is for script (below)
-sudo apt update
-sudo apt update --fix-missing
-sudo apt install -y ceph-deploy \
+sudo apt update --assume-yes
+sudo apt update --fix-missing --assume-yes
+sudo apt install -y --assume-yes ceph-deploy \
   ntp \
   blktrace \
   python3
