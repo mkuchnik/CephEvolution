@@ -84,6 +84,7 @@ These can be found
 You can find the ceph-deploy scripts in `Ceph_Deploy_Install_Scripts`.
 These scripts are included just for completion.
 
+### Checking the Cluster
 Once your cluster is installed, you should check the status of your cluster.
 ```bash
 ceph -s
