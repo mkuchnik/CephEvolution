@@ -7,6 +7,8 @@ cluster we used.
 However, if you do want to use them, read and understand the documentation here
 so that you know what each part of the script does:
 [here](https://docs.ceph.com/docs/luminous/rados/deployment/).
+You can then build your own scripts that make sense for your cluster, referring
+to these for help.
 
 The scripts you use to launch the cluster are:
 For Bluestore HDD:
