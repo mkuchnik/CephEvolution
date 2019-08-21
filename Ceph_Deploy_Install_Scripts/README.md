@@ -4,6 +4,9 @@ cluster.
 We currently use ceph-ansible, and these are provided for historical reasons.
 These scripts are not portable across clusters, and are heavily tuned to the
 cluster we used.
+However, if you do want to use them, read and understand the documentation here
+so that you know what each part of the script does:
+[here](https://docs.ceph.com/docs/luminous/rados/deployment/).
 
 The scripts you use to launch the cluster are:
 For Bluestore HDD:
