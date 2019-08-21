@@ -19,6 +19,7 @@ if [ "$#" -ne 3 ]; then
 fi
 
 # Using above range, we have these nodes
+# For different clusters, you may have to change range and hostnames
 nodes="h0 h1 h2 h3 h4 h5 h6 h7 h8 h9 h10 h11 h12 h13 h14 h15"
 
 # We can have OSD data and WAL split by device. However, we collocate.

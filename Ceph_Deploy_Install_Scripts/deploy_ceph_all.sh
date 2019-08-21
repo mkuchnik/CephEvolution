@@ -19,6 +19,8 @@ script_location="${ScriptsHome}/deploy_ceph.sh"
 # Name used to install Ceph. This will have to be changed to your user
 # Note: by default we assume current user
 CephAdminUsername=$(id -un)
+# The prefix for hostnames
+# We assume 16 hosts, which are named h0, h1, h2, ... h15
 node_prefix="h"
 
 if [ "$#" -eq 0 ]; then
