@@ -31,6 +31,8 @@ If you open one of these, you will see that it calls ``setup_ceph_deploy.sh``,
 ``setup_ceph_deploy.sh`` simply sets the communication default for `/etc/pdsh/rcmd_default`.
 ``deploy_ceph.sh`` sets proxies and other PDL Orca specific configurations;
 without this, naming nodes may not work.
+These PDL Orca scripts are not applicable to other clusters; you can ignore
+them.
 It also handles adding information for where Ceph repositories are.
 ``deploy_ceph_all.sh`` copies ``deploy_ceph.sh`` to other nodes and runs it
 there.
