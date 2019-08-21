@@ -4,6 +4,9 @@ cluster.
 We currently use ceph-ansible, and these are provided for historical reasons.
 These scripts are not portable across clusters, and are heavily tuned to the
 cluster we used.
+However, if you do want to use them, read and understand the documentation here
+so that you know what each part of the script does:
+[here](https://docs.ceph.com/docs/luminous/rados/deployment/).
 
 The scripts you use to launch the cluster are:
 For Bluestore HDD:
@@ -28,6 +31,8 @@ If you open one of these, you will see that it calls ``setup_ceph_deploy.sh``,
 ``setup_ceph_deploy.sh`` simply sets the communication default for `/etc/pdsh/rcmd_default`.
 ``deploy_ceph.sh`` sets proxies and other PDL Orca specific configurations;
 without this, naming nodes may not work.
+These PDL Orca scripts are not applicable to other clusters; you can ignore
+them.
 It also handles adding information for where Ceph repositories are.
 ``deploy_ceph_all.sh`` copies ``deploy_ceph.sh`` to other nodes and runs it
 there.
