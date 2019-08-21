@@ -33,6 +33,8 @@ For the original experiments, all nodes run Linux kernel 4.15 on Ubuntu 18.04,
 and the Luminous release (v12.2.11) of Ceph.
 Ubuntu 16.04 should obtain similar results for RADOS experiments.
 However, Ceph RBD may require newer kernel features as described [here](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1728739).
+If you want to use Ubuntu 16.04, you'll have to either upgrade your kernel or
+configure Ceph RBD to not use those extra features.
 
 ## Experiment Descriptions
 We provide instructions on reproducing the results of the experiments in the
