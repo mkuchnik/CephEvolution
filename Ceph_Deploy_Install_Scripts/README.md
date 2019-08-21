@@ -32,3 +32,11 @@ It also handles adding information for where Ceph repositories are.
 ``deploy_ceph_all.sh`` copies ``deploy_ceph.sh`` to other nodes and runs it
 there.
 Finally, ``install_cluster_param.sh`` actually installs Ceph on the nodes.
+
+For porting to a different cluster, you'll want to change devices in ``install_cluster_param.sh``.
+We also make an assumption on having a common view of scripts between nodes
+(e.g., a network filesystem).
+If you don't have such a setup, you will have to emulate the view by copying the
+scripts in this directory onto the same path on each node.
+The easiest way to do this would be to simply clone the repo in the same
+directory.
