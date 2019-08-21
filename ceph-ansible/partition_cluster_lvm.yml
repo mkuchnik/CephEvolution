@@ -44,6 +44,7 @@
       insertafter: EOF
       line: "http_proxy={{ proxy_name }}\nhttps_proxy={{ proxy_name }}\nftp_proxy={{ proxy_name }}"
       dest: /etc/environment
+    tags: PDL
 
   - name: Run fixpart
     shell: "/share/testbed/bin/linux-fixpart all"
