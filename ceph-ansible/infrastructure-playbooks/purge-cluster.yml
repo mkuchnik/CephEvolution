@@ -223,6 +223,7 @@
   - name: see if encrypted partitions are present
     shell: |
       blkid -t TYPE=crypto_LUKS -s PARTLABEL -s PARTUUID | grep "ceph.*." | grep -o PARTUUID.* | cut -d '"' -f 2
+    become: no
     register: encrypted_ceph_partuuid
 
   - name: get osd data and lockbox mount points
@@ -294,12 +295,14 @@
   - name: get ceph data partitions
     shell: |
       blkid -o device -t PARTLABEL="ceph data"
+    become: no
     failed_when: false
     register: ceph_data_partition_to_erase_path
 
   - name: get ceph lockbox partitions
     shell: |
       blkid -o device -t PARTLABEL="ceph lockbox"
+    become: no
     failed_when: false
     register: ceph_lockbox_partition_to_erase_path
 
@@ -342,24 +345,28 @@
   - name: get ceph block partitions
     shell: |
       blkid -o device -t PARTLABEL="ceph block"
+    become: no
     failed_when: false
     register: ceph_block_partition_to_erase_path
 
   - name: get ceph journal partitions
     shell: |
       blkid -o device -t PARTLABEL="ceph journal"
+    become: no
     failed_when: false
     register: ceph_journal_partition_to_erase_path
 
   - name: get ceph db partitions
     shell: |
       blkid -o device -t PARTLABEL="ceph block.db"
+    become: no
     failed_when: false
     register: ceph_db_partition_to_erase_path
 
   - name: get ceph wal partitions
     shell: |
       blkid -o device -t PARTLABEL="ceph block.wal"
+    become: no
     failed_when: false
     register: ceph_wal_partition_to_erase_path
 
