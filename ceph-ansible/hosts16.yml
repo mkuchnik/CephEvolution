@@ -4,7 +4,7 @@ all:
       children:
         mons:
           hosts:
-            h[0:2]
+            h[3:5]
         osds:
           hosts:
             h[0:15]
