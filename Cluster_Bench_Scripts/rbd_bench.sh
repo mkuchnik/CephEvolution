@@ -7,7 +7,7 @@ size="30G"
 mkdir rbd-tests
 for rw in "read" "randread" "write" "randwrite"; do
 #for i in 4096 2048 1024 512 256 128 64 32 16 8 4; do
-for i in 128 64 32 16 8 4; do
+for i in 4096 2048 1024 512 256 128; do
   bs="${i}K"
   echo "bs ${bs}"
   cmd="sudo fio --ioengine=libaio --direct=1 --bs=${bs} --iodepth=${iodepth} \
