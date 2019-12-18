@@ -140,7 +140,7 @@ int main(int argc, char** argv) {
 
   std::cout << std::string(80, '*') << std::endl;
   if (args.size() != 5) {
-    throw std::runtime_error("Usage " + args.at(0) + " <nobjects> <test_type>");
+    throw std::runtime_error("Usage " + args.at(0) + " <n_objects> <test_type> <DB_path> <file_or_block_path>");
   }
   std::string arg1 = args.at(1);
   std::stringstream ss(arg1);
