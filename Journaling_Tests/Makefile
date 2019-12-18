@@ -1,3 +1,5 @@
+$(shell (export ROCKSDB_ROOT="$(CURDIR)/rocksdb"; export PORTABLE="$(PORTABLE)"; cd rocksdb; "$(CURDIR)/rocksdb/build_tools/build_detect_platform" "$(CURDIR)/rocksdb/make_config.mk"))
+
 include rocksdb/make_config.mk
 
 ifndef DISABLE_JEMALLOC

@@ -8,7 +8,3 @@ sudo apt-get install libgflags-dev libsnappy-dev zlib1g-dev libbz2-dev \
 # git clone https://github.com/facebook/rocksdb.git
 # cd rocksdb
 # git checkout v6.1.2
-
-# We then build rocksdb
-cd rocksdb
-make
